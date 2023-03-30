@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import Blueprint, render_template, redirect, session, request
 import csv
 
 users = []
@@ -12,7 +12,7 @@ with open(filename, 'r') as csvfile:
             'name': row[0],
             'email': row[1],
             'password': row[2],
-            'admin': row[3]
+            'admin':  row[3]
         })
 
 
@@ -30,6 +30,7 @@ def register(name, email, password):
         nova_linha = [name, email, password, False]
         writer.writerow(nova_linha)
         file.close()
+    session['logged_in'] = True
     return redirect('/')
 
 
@@ -38,13 +39,25 @@ def login(email, password):
     for user in users:
         if email == user['email']:
             if password == user['password']:
+                session['name'] = user['name']
+                session['email'] = user['email']
+                session['logged_in'] = True
+                session['is_admin'] = True if user['admin'] == "True" else False 
                 flag = True
     if flag == False:
         return render_template("auth/auth_index.html", error='Email ou senha inválidos!')
     return redirect('/')
 
+@auth.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/")
+
+
 @auth.route("/", methods=['POST', 'GET'])
 def auth_index():
+    if session.get('logged_in'):
+        return redirect("/")
     if request.method == 'GET':
         return render_template("auth/auth_index.html")
     if request.form['type'] == 'register':
