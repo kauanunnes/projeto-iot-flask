@@ -11,7 +11,7 @@ app.register_blueprint(auth, url_prefix='/auth')
 
 @app.route('/')
 def index():
-    return render_template("home.html")
+    return render_template("home.html", logged_in=session.get('logged_in'), name=session.get('is_admin'))
 
 if __name__ == "__main__":
     app.run(debug=True)
