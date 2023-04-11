@@ -9,10 +9,11 @@ with open(filename, 'r') as csvfile:
     datareader = csv.reader(csvfile)
     for row in datareader:
         users.append({
-            'name': row[0],
-            'email': row[1],
-            'password': row[2],
-            'admin':  row[3]
+            'id': row[0],
+            'name': row[1],
+            'email': row[2],
+            'password': row[3],
+            'admin':  row[4]
         })
 
 
@@ -27,7 +28,7 @@ def register(name, email, password):
         return render_template("auth/auth_index.html", error='Email já consta no sistema!')
     with open(filename, mode='a', newline='', encoding='utf-8') as file:
         writer = csv.writer(file, lineterminator='\n')
-        nova_linha = [name, email, password, False]
+        nova_linha = [len(users) + 1, name, email, password, False]
         writer.writerow(nova_linha)
         file.close()
     session['logged_in'] = True
