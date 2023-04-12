@@ -1,17 +1,45 @@
-<!-- base.html -->
-<html>
-    <head>
-        <title>Pessoas</title>
-    </head>
-    <body>
-        <h2>Módulo de gerenciamento de pessoas do Meu Restaurante</h2>
-        <ul>
-            <li><a href="#">Registrar Funcionário</a></li>
-            <li><a href="#">Registrar Garçom</a></li>
-            <li><a href="#">Registrar Cliente</a></li>
-        </ul>
-        <div id="content">
-            {% block content %} {% endblock %}
+<!-- home.html -->
+{% extends "base.html" %} {% block content %}
+<div class="center m-4">
+  <div class="container">
+    <!-- home.html -->
+    <div class="center m-4">
+      <div class="container">
+        <div class="row h-100">
+          <div class="col-6">
+            <div class="dropdown" style="cursor: pointer;">
+              <h2
+                class="dropdown-toggle text-black"
+                href="#"
+                id="navbarDropdownMenuLink"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Informações pessoais
+              </h2>
+              <div
+                class="dropdown-menu end-0"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+                {% if is_admin %}
+                <a class="dropdown-item" href="to_list_all">Listar usuários</a>
+                {% endif %}
+                <a class="dropdown-item" href="to_privacy">Privacidade</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <iframe
+              src="{{ frame_value }}"
+              width="100%"
+              height="100%"
+              style="border: none"
+            ></iframe>
+          </div>
         </div>
-    </body>
-</html>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
