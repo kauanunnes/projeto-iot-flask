@@ -8,6 +8,7 @@ app = Flask(__name__, template_folder="./views/", static_folder="./static/")
 app.secret_key = 'mysecretkey'
 app.register_blueprint(base, url_prefix='/base')
 app.register_blueprint(auth, url_prefix='/auth')
+app.register_blueprint(people, url_prefix='/people')
 
 @app.route('/')
 def index():
