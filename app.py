@@ -9,6 +9,7 @@ app.secret_key = 'mysecretkey'
 app.register_blueprint(base, url_prefix='/base')
 app.register_blueprint(auth, url_prefix='/auth')
 app.register_blueprint(people, url_prefix='/people')
+app.register_blueprint(iot, url_prefix='/iot')
 
 @app.route('/')
 def index():

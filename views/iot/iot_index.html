@@ -1,18 +1,89 @@
-<!-- base.html -->
-<html>
-    <head>
-        <title>Iot</title>
-    </head>
-    <body>
-        <h2>Módulo de iot do Meu Restaurante</h2>
-        <ul>
-            <li><a href="#">Cadastrar sensor</a></li>
-            <li><a href="#">Cadastrar atuador</a></li>
-            <li><a href="#">Leitura de dados dos sensores</a></li>
-            <li><a href="#">Acionamento dos atuadores</a></li>
-        </ul>
-        <div id="content">
-            {% block content %} {% endblock %}
+<!-- home.html -->
+{% extends "base.html" %} {% block content %}
+<div class="center m-4">
+  <div class="container">
+    <!-- home.html -->
+    <div class="center m-4">
+      <div class="container">
+        <div class="row">
+          <h2>Consumo de água</h2>
         </div>
-    </body>
-</html>
+        <div class="row">
+          <h4>Sua meta diária é: <strong>{{user['weight'] * 35}}ml</strong></h4>
+        </div>
+        <div class="row">
+          <div class="col-6 my-2">
+            <div class="card">
+              <div class="card-header">Hoje</div>
+              <div class="card-body">
+                <div class="card-title">
+                  {% if is_aim_finished %}
+                  <div class="alert alert-info" role="alert">
+                    Parabéns! Você atingiu a meta diária.
+                  </div>
+                  {% endif %}
+                  <h5>{{today.strftime("%B %d, %Y")}}</h5>
+                </div>
+                <p class="card-text">
+                  Você já bebeu {{consumption['total_consumption']}}ml, faltam
+                  {{ user['weight'] * 35 - total_consumption}}ml para bater a
+                  meta diária!
+                </p>
+                <form method="post" name="drink">
+                  <!-- <input type="hidden" name="qtd" value="250" /> -->
+                  <select
+                    class="form-select"
+                    name="qtd"
+                    aria-label="Default select example"
+                  >
+                    {% if user_sensors|length == 0 %}
+                    <option disabled selected>
+                      Nenhum sensor cadastrado, por favor cadastre.
+                    </option>
+
+                    {% else %}
+                    <option disabled selected>Selecione o sensor usado</option>
+
+                    {% endif %} {% for item in user_sensors %}
+                    <option value="{{item['water_qtd']}}">
+                      {{item['water_qtd']}}ml
+                    </option>
+                    {% endfor %}
+                  </select>
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    {%
+                    if
+                    is_aim_finished
+                    %}disabled{%
+                    endif
+                    %}
+                  >
+                    Beber
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 my-2">
+            <div class="card">
+              <div class="card-header">Ontem</div>
+              <div class="card-body">
+                <h5 class="card-title">{{yesterday.strftime("%B %d, %Y")}}</h5>
+
+                <p class="card-text">
+                  {%if yesterday_consumption != {} %} Você bebeu
+                  {{yesterday_consumption['total_consumption']}}ml. {% else %}
+                  Não existem dados disponíveis. {% endif %}
+                </p>
+                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
