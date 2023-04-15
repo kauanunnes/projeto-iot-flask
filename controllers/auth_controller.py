@@ -1,39 +1,8 @@
 from flask import Blueprint, render_template, redirect, session, request
-import csv
-
-users = []
-
-filename = 'C:/Users/kaua.nunes/Desktop/faculdade/experiancia-criativa/projeto-pbl/models/users.csv'
-
-with open(filename, 'r') as csvfile:
-    datareader = csv.reader(csvfile)
-    for row in datareader:
-        users.append({
-            'id': row[0],
-            'name': row[1],
-            'email': row[2],
-            'password': row[3],
-            'admin':  row[4]
-        })
-
+from models.users.users import user_by_email, register, users
+from models.user_consumption.user_consumption import create_today_date
 
 auth = Blueprint("auth", __name__, template_folder="./views/", static_folder='./static/', root_path="./")
-
-def register(name, email, password):
-    flag = True
-    for user in users:
-        if email == user['email']:
-            flag = False
-    if flag == False:
-        return render_template("auth/auth_index.html", error='Email já consta no sistema!')
-    with open(filename, mode='a', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file, lineterminator='\n')
-        nova_linha = [len(users) + 1, name, email, password, False]
-        writer.writerow(nova_linha)
-        file.close()
-    session['logged_in'] = True
-    return redirect('/')
-
 
 def login(email, password):
     flag = False
@@ -47,6 +16,7 @@ def login(email, password):
                 flag = True
     if flag == False:
         return render_template("auth/auth_index.html", error='Email ou senha inválidos!')
+    create_today_date(user_by_email(email)['id'])
     return redirect('/')
 
 @auth.route("/logout")
@@ -62,6 +32,13 @@ def auth_index():
     if request.method == 'GET':
         return render_template("auth/auth_index.html")
     if request.form['type'] == 'register':
-        return register(request.form['registerInputName'], request.form['registerInputEmail'], request.form['registerInputPassword'])
+        flag = register(request.form['registerInputName'], request.form['registerInputEmail'], request.form['registerInputPassword'],  request.form['registerInputWeight'])
+        if not flag:
+            return render_template("auth/auth_index.html", error='Email já consta no sistema!')
+        session['logged_in'] = True
+        session['name'] = request.form['registerInputName']
+        session['email'] = request.form['registerInputEmail']
+        session['is_admin'] = False
+        return redirect("/")
     else: 
         return login(request.form['loginInputEmail'], request.form['loginInputPassword'])

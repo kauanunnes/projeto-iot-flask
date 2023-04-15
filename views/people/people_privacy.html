@@ -60,6 +60,19 @@
               placeholder="New password"
             />
           </div>
+          <div class="form-group">
+            <label for="weightInputupdate">Weight</label>
+            <input
+              type="number"
+              min="1"
+              class="form-control"
+              id="weightInputupdate"
+              name="updateInputweight"
+              disabled
+              value="{{user.weight}}"
+              placeholder="Your weight"
+            />
+          </div>
           <button disabled type="submit" class="btn btn-primary">Atualizar</button>
         </form>
         </div>

@@ -1,126 +1,125 @@
 <!-- home.html -->
 {% extends "base.html" %} {% block content %}
-<div class="center m-4">
-  <div class="container">
-    <div class="row">
-      <div class="col-6">
-        <div class="w-100">
-          <h1 class="pb-3">Hydrate Reminder</h1>
-          <div class="accordion" id="accordionExample">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingOne">
-                <button
-                  class="accordion-button"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseOne"
-                  aria-expanded="true"
-                  aria-controls="collapseOne"
-                >
-                  Importância da água em nossas vidas
-                </button>
-              </h2>
-              <div
-                id="collapseOne"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingOne"
-                data-bs-parent="#accordionExample"
+
+<div class="container my-4">
+  <div class="row">
+    <div class="col-6">
+      <div class="w-100">
+        <h1 class="pb-3">Hydrate Reminder</h1>
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button
+                class="accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
               >
-                <div class="accordion-body">
-                  <p>
-                    Os principais objetivos da nossa aplicação são
-                    <strong>medir</strong> e <strong>ajudar</strong>
-                    nossos usuários a terem uma qualidade de vida melhor, pois
-                    visamos incentivar o consumo de água em nosso cotidiano. A
-                    aplicação surge da ideia de nos alertar sobre o tempo que
-                    estamos sem beber água, nos deixando informados da
-                    quantidade de água ingerida por dia, semanas e meses, para
-                    método de comparação da evolução do usuáro ao longo do tempo
-                    de utilização. Aumentando assim a capacidade dele de ingerir
-                    a água naturalmente, tornando algo corriqueiro.
-                  </p>
-                </div>
+                Importância da água em nossas vidas
+              </button>
+            </h2>
+            <div
+              id="collapseOne"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingOne"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                <p>
+                  Os principais objetivos da nossa aplicação são
+                  <strong>medir</strong> e <strong>ajudar</strong>
+                  nossos usuários a terem uma qualidade de vida melhor, pois
+                  visamos incentivar o consumo de água em nosso cotidiano. A
+                  aplicação surge da ideia de nos alertar sobre o tempo que
+                  estamos sem beber água, nos deixando informados da
+                  quantidade de água ingerida por dia, semanas e meses, para
+                  método de comparação da evolução do usuáro ao longo do tempo
+                  de utilização. Aumentando assim a capacidade dele de ingerir
+                  a água naturalmente, tornando algo corriqueiro.
+                </p>
               </div>
             </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingTwo">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="collapseTwo"
-                >
-                  O que vamos utilizar para tornar isso real
-                </button>
-              </h2>
-              <div
-                id="collapseTwo"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingTwo"
-                data-bs-parent="#accordionExample"
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
               >
-                <div class="accordion-body">
-                  Iremos montar um dispositivo que gera a queda da água e
-                  controla seu fluido de forma automática, acertando a
-                  quantidade e medindo para não ocorrer vazaemntos ou
-                  desperdícios. Todo projeto funcionará em pelo site ou
-                  aplicativo. Nestes estarão os dados sobre a ingestão de água
-                  do usuário, mantendo assim o controle sobre seus hábitos.
-                </div>
+                O que vamos utilizar para tornar isso real
+              </button>
+            </h2>
+            <div
+              id="collapseTwo"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingTwo"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                Iremos montar um dispositivo que gera a queda da água e
+                controla seu fluido de forma automática, acertando a
+                quantidade e medindo para não ocorrer vazaemntos ou
+                desperdícios. Todo projeto funcionará em pelo site ou
+                aplicativo. Nestes estarão os dados sobre a ingestão de água
+                do usuário, mantendo assim o controle sobre seus hábitos.
               </div>
             </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingThree">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseThree"
-                  aria-expanded="false"
-                  aria-controls="collapseThree"
-                >
-                  Framework de design
-                </button>
-              </h2>
-              <div
-                id="collapseThree"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingThree"
-                data-bs-parent="#accordionExample"
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
               >
-                <div class="accordion-body">
-                  Para desenvolver nosso trabalho escolhemos usar a ferramenta
-                  do <strong>Bootstrap</strong>, devido a sua facilidade e
-                  eficiência para automação de CSS. Outro ponto para utilizarmos
-                  foi sua variedade de templates. Dentro outras ferramentas que
-                  foram pensadas para o design, o bootstrap já é algo que um de
-                  nosso membros tem contato diariamente, facilitando assim na
-                  criação de novas telas.
-                </div>
+                Framework de design
+              </button>
+            </h2>
+            <div
+              id="collapseThree"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingThree"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                Para desenvolver nosso trabalho escolhemos usar a ferramenta
+                do <strong>Bootstrap</strong>, devido a sua facilidade e
+                eficiência para automação de CSS. Outro ponto para utilizarmos
+                foi sua variedade de templates. Dentro outras ferramentas que
+                foram pensadas para o design, o bootstrap já é algo que um de
+                nosso membros tem contato diariamente, facilitando assim na
+                criação de novas telas.
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-6">
-        <img
-          class="img-fluid"
-          src="../static/img/healthy.png"
-          alt="welcome cats"
-        />
-      </div>
     </div>
+    <div class="col-6">
+      <img
+        class="img-fluid"
+        src="../static/img/healthy.png"
+        alt="welcome cats"
+      />
+    </div>
+  </div>
 
-    <div class="row">
-      <div class="col-4">
-        {% if not logged_in %}
-        <button type="button" class="btn btn-primary">
-          <a href="/auth" class="text-white">Faça login aqui!</a>
-        </button>
-        {% endif %}
-      </div>
+  <div class="row">
+    <div class="col-4">
+      {% if not logged_in %}
+      <button type="button" class="btn btn-primary">
+        <a href="/auth" class="text-white">Faça login aqui!</a>
+      </button>
+      {% endif %}
     </div>
   </div>
 </div>
