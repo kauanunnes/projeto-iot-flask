@@ -1,39 +1,30 @@
-import csv
-from models.user_consumption.user_consumption import create_today_date
-filename = 'C:/Users/kaua.nunes/Desktop/faculdade/experiancia-criativa/projeto-pbl/models/users.csv'
+from models.db import db
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash
 
-users = []
-with open(filename, 'r', encoding='utf-8') as csvfile:
-    reader = csv.DictReader(csvfile)
-    users = list(reader)
+class User(UserMixin, db.Model):
+    __tablename__ = "user"
+    id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
+    name = db.Column(db.String(100))
+    email = db.Column(db.String(130))
+    password = db.Column(db.String(130))
+    admin = db.Column(db.Boolean, default=False)
+    weight = db.Column(db.Float)
 
-def user_by_email(email):
-    user = {}
-    for item in users:
-      if item['email'] == email:
-          user = {
-              'id': item['id'],
-              'name': item['name'],
-              'email': item['email'],
-              'weight': int(item['weight'])
-          }
-    return user
+    sensors = db.relationship('Sensor', backref='users')
+    user_consumptions = db.relationship('UserConsumption', backref='users')
 
-def register(name, email, password, weight):
-    flag = True
-    for user in users:
-        if email == user['email']:
-            flag = False
-    if flag:
-        with open(filename, mode='a', newline='', encoding='utf-8') as file:
-            writer = csv.writer(file)            
-            writer.writerow([len(users) + 1, name, email, password, False, weight])
-        refresh()
-        create_today_date(user_by_email(email)['id'])
-    return flag
+    def get_user_by_email(email):
+        return User.query.filter_by(email = email).first()
     
-def refresh():
-    global users
-    with open(filename, 'r', encoding='utf-8') as csvfile:
-        reader = csv.DictReader(csvfile)
-        users = list(reader)
+    def register(name, email, password, weight):
+        user = User(name = name, email = email, weight = weight, password = generate_password_hash(password))
+        db.session.add(user)
+        db.session.commit()
+
+    def get_users():
+        return User.query.all()
+    
+    def get_user(id):
+        print(User.query.filter_by(id = id).first())
+        return User.query.filter_by(id = id).first()

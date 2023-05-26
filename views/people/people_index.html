@@ -22,7 +22,7 @@
                 class="dropdown-menu end-0"
                 aria-labelledby="navbarDropdownMenuLink"
               >
-                {% if is_admin %}
+                {% if user.admin %}
                 <a class="dropdown-item" href="to_list_all">Listar usuários</a>
                 {% endif %}
                 <a class="dropdown-item" href="to_privacy">Privacidade</a>

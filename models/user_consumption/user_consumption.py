@@ -1,43 +1,27 @@
-import csv
-from datetime import date, datetime, timedelta
-# from users.users import users
-filename = 'C:/Users/kaua.nunes/Desktop/faculdade/experiancia-criativa/projeto-pbl/models/water_day_by_user.csv'
-today = date.today()
+from models.db import db
+from models import User
+from datetime import date
 
-consumptions = []
-with open(filename, 'r', encoding='utf-8') as csvfile:
-    reader = csv.DictReader(csvfile)
-    consumptions = list(reader)
 
-def find_by_date_and_id(date, id):
-    consumption = {}
-    for item in consumptions:
-      if item['user_id'] == id and item['date'] == date:
-        consumption = item
-    return consumption
+class UserConsumption(db.Model):
+  __tablename__ = "user_consumption"
+  id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
+  date = db.Column(db.Date)
+  total_consumption = db.Column(db.Float)
+  user_id = db.Column(db.Integer(), db.ForeignKey(User.id), nullable=False)
 
-def increase_consumption(date, id, qtd):
-  for row in consumptions:
-    if row['user_id'] == id and row['date'] == date:
-        row['total_consumption'] = int(qtd) + int(row['total_consumption'])
-  with open(filename, mode='w', newline='') as file:
-    writer = csv.DictWriter(file, fieldnames=['date', 'user_id', 'total_consumption'])
-    writer.writeheader()
-    writer.writerows(consumptions)
 
-def create_today_date(id):
-   if any(find_by_date_and_id(today.strftime("%d-%m-%Y"), id)):
-      print(find_by_date_and_id(today.strftime("%d-%m-%Y"), id))
-      return
-   with open(filename, mode='a', newline='') as file:
-    # create a writer object
-    writer = csv.writer(file)
-    
-    # write the new row to the file
-    writer.writerow([today.strftime("%d-%m-%Y"), id, 0])
+  def find_by_date_and_id(date, id):
+    return UserConsumption.query.filter_by(date = date, user_id = id).first()
+  
+  def increase_consumption(date, id, qtd):
+    UserConsumption.query.filter_by(date = date, user_id = id)\
+                .update(dict(total_consumption=qtd))
+    db.session.commit()
 
-def refresh():
-   global consumptions
-   with open(filename, 'r', encoding='utf-8') as csvfile:
-    reader = csv.DictReader(csvfile)
-    consumptions = list(reader)
+  def create_today_date(id):
+    today = date.today()
+    user_consumption = UserConsumption(date = today.strftime("%Y-%m-%d"), total_consumption = 0, user_id = id)
+    db.session.add(user_consumption)
+    db.session.commit()
+

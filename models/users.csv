@@ -1,7 +1,0 @@
-id,name,email,password,admin,weight
-1,admin,admin@admin.com,admin,True, 50
-2,Kauã,kauanunes123@gmail.com,1234,False, 63
-3,teste,t@teste.com,1234,False,65
-4,kevin,kevin@kevin.com,1234,False,55
-5,andre,andre@gmail.com,Senha1,False,90
-6,kaua2,kaua@kaua.com,1234,False,77
