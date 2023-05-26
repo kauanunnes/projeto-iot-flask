@@ -1,11 +1,15 @@
 <!-- home.html -->
+
 {% extends "base.html" %} {% block content %}
+
 <div class="center m-4">
   <div class="container">
     <div class="row p-4">
-      {% if error %}
-      <div class="alert alert-warning" role="alert">{{error}}</div>
+      {% with messages = get_flashed_messages() %}
+      {% if messages  %}
+      <div class="alert alert-warning" role="alert">{{messages[0]}}</div>
       {% endif %}
+      {% endwith %}
       <div class="col-6">
         <h2>Faça login</h2>
         <form method="post">

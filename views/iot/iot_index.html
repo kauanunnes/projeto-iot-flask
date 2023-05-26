@@ -2,7 +2,6 @@
 {% extends "base.html" %} {% block content %}
 <div class="center m-4">
   <div class="container">
-    <!-- home.html -->
     <div class="center m-4">
       <div class="container">
         <div class="row">
@@ -26,27 +25,27 @@
                 </div>
                 <p class="card-text">
                   Você já bebeu {{consumption['total_consumption']}}ml, faltam
-                  {{ user['weight'] * 35 - total_consumption}}ml para bater a
+                  {{ user.weight * 35 - total_consumption}}ml para bater a
                   meta diária!
                 </p>
                 <form method="post" name="drink">
-                  <!-- <input type="hidden" name="qtd" value="250" /> -->
                   <select
                     class="form-select"
                     name="qtd"
                     aria-label="Default select example"
+                    required
                   >
                     {% if user_sensors|length == 0 %}
-                    <option disabled selected>
+                    <option disabled selected value="">
                       Nenhum sensor cadastrado, por favor cadastre.
                     </option>
 
                     {% else %}
-                    <option disabled selected>Selecione o sensor usado</option>
+                    <option disabled value="" selected>Selecione o sensor usado</option>
 
                     {% endif %} {% for item in user_sensors %}
-                    <option value="{{item['water_qtd']}}">
-                      {{item['water_qtd']}}ml
+                    <option value="{{item.water_qtd}}">
+                      {{item.water_qtd}}ml
                     </option>
                     {% endfor %}
                   </select>
@@ -73,11 +72,10 @@
                 <h5 class="card-title">{{yesterday.strftime("%B %d, %Y")}}</h5>
 
                 <p class="card-text">
-                  {%if yesterday_consumption != {} %} Você bebeu
+                  {%if yesterday_consumption != None %} Você bebeu
                   {{yesterday_consumption['total_consumption']}}ml. {% else %}
                   Não existem dados disponíveis. {% endif %}
                 </p>
-                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
               </div>
             </div>
           </div>

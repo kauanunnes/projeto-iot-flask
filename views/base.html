@@ -32,7 +32,7 @@
           Perfil
         </a>
         <div class="dropdown-menu end-0" aria-labelledby="navbarDropdownMenuLink">
-          {% if logged_in %}
+          {% if current_user.is_authenticated %}
           
           <a class="dropdown-item" href="/iot">Consumo de água</a>
           <a class="dropdown-item" href="/people">Informações pessoais</a>
